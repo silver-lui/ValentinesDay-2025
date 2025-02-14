@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For You ❤️</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Parisienne&family=Cinzel&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            font-family: 'Cinzel', serif;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote {
+            font-family: 'Tangerine', cursive;
+            font-weight: 700;
+            font-size: 3.5em;
+            line-height: 1.4;
+            color: #d65076;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+        }
+
+        .input-container {
+            margin: 30px 0;
+        }
+
+        input {
+            padding: 15px 25px;
+            font-size: 1.2em;
+            border: 2px solid #ffd1dc;
+            border-radius: 50px;
+            outline: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+        }
+
+        input:focus {
+            border-color: #d65076;
+            box-shadow: 0 0 15px rgba(214, 80, 118, 0.2);
+        }
+
+        .heart {
+            font-size: 2em;
+            color: #d65076;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .surprise {
+            margin-top: 30px;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .message {
+            font-family: 'Parisienne', cursive;
+            font-size: 2.2em;
+            color: #d65076;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s ease;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .buttons button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: absolute;
+        }
+
+        .yes-btn {
+            background: #ff4d6d;
+            color: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .no-btn {
+            background: #333;
+            color: white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeIn">
+        <div class="heart">❤️</div>
+        <p class="quote">
+            "Today someone asked me which was the worst Valentine's Day for you,<br>
+            and my answer was every single one of them until last year<br/>when I met her.<br>
+            So thank you for that."
+        </p>
+        
+        <div class="input-container">
+            <input type="text" 
+                   placeholder="Enter the special code..." 
+                   maxlength="6"
+                   onkeyup="checkCode(this.value)"
+                   class="animate__animated">
+        </div>
+
+        <div id="surprise" class="surprise hidden animate__animated">
+            <video width="320" height="240" controls>
+                <source src="src/video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p class="message">
+                Every moment with you is a gift.<br>
+                Happy Valentine's Day, Tako! ❤️ <br/>
+                <br>
+                Will You Be My Valentine? ❤️
+            </p>
+            
+            <div class="buttons hidden" id="buttons">
+                <button class="yes-btn" onclick="showResponse()">Yes</button>
+                <button class="no-btn" onmouseover="moveNoButton()" onclick="moveNoButton()">No</button>
+            </div>
+            
+            <p class="message hidden" style="opacity: 1;" id="response">Hehehe, I knew that! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        function checkCode(code) {
+            if (code === '071023') {
+                document.getElementById('surprise').classList.remove('hidden');
+                document.getElementById('surprise').classList.add('animate__fadeIn');
+                document.querySelector('.message').style.opacity = '1';
+                document.querySelector('input').blur();
+                document.getElementById('buttons').classList.remove('hidden');
+            }
+        }
+
+        function showResponse() {
+            document.getElementById('response').classList.remove('hidden');
+            document.getElementById('buttons').style.display = 'none';
+        }
+
+        function moveNoButton() {
+            let button = document.querySelector('.no-btn');
+            let randomX = (Math.random() * 400) - 200;
+            randomX = randomX < 0 ? randomX - 100 : randomX + 100;
+            button.style.transform = `translateX(${randomX}px)`;
+        }
+    </script>
+</body>
+</html>
